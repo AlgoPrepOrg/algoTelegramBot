@@ -51,16 +51,12 @@ public class TelegramBotClient {
 
     public String poll(Poll poll) {
         this.telegramUrl = String.format(TELEGRAM_SEND_MESSAGE, botToken, SEND_POLL);
-        try {
-            String optionsText = poll.options().stream()
-                    .map(option -> String.format(ITEM, option))
-                    .collect(Collectors.joining(DELIMITER));
+        String optionsText = poll.options().stream()
+                .map(option -> String.format(ITEM, option))
+                .collect(Collectors.joining(DELIMITER));
 
-            String createRequest = String.format(POLL_CHAT_ID_WITH_QUESTION_AND_OPTIONS, chatId, poll.title(), optionsText);
+        String createRequest = String.format(POLL_CHAT_ID_WITH_QUESTION_AND_OPTIONS, chatId, poll.title(), optionsText);
 
-            return httpClient.sendPostMessage(telegramUrl, Map.of(CONTENT_TYPE, CONTENT_TYPE_VALUE), createRequest);
-        } catch (Exception exe) {
-            throw new TelegramGeneralException("Cannot send poll to chatId " + chatId, exe);
-        }
+        return httpClient.sendPostMessage(telegramUrl, Map.of(CONTENT_TYPE, CONTENT_TYPE_VALUE), createRequest);
     }
 }
