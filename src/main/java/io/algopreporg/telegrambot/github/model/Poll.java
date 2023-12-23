@@ -1,4 +1,4 @@
-package io.algopreporg.telegrambot.telegram.poll.model;
+package io.algopreporg.telegrambot.github.model;
 
 import java.util.List;
 
