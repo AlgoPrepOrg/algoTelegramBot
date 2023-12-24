@@ -29,6 +29,7 @@ public class TelegramBotClient {
     private static final String CONTENT_TYPE_VALUE = "application/json";
 
     private static final String TELEGRAM_SEND_MESSAGE = "https://api.telegram.org/bot%s/%s";
+    private static final String TOKEN = "TELEGRAM_BOT_TOKEN";
     private static final String SEND_MESSAGE = "sendMessage";
     private static final String SEND_POLL = "sendPoll";
     private static final String DELIMITER = ",";
@@ -36,10 +37,10 @@ public class TelegramBotClient {
     private final String botToken;
     private final HttpClient httpClient;
 
-    public TelegramBotClient(Integer chatId, String botToken, HttpClient httpClient) {
+    public TelegramBotClient(Integer chatId, HttpClient httpClient) {
         this.chatId = chatId;
-        this.botToken = botToken;
         this.httpClient = httpClient;
+        this.botToken = System.getenv(TOKEN);
     }
 
     public String sendMessage(String message) {

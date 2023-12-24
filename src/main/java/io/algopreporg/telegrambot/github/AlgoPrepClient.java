@@ -7,15 +7,17 @@ import java.util.*;
 
 public class AlgoPrepClient {
 
+    private static final String GITHUB_ALGO_URL = "GITHUB_ALGO_URL";
+
     private static final String FILE_TYPE = ".csv";
     private static final String SPLITERATOR = ";";
 
     private final HttpClient httpClient;
     private final String algoUrl;
 
-    public AlgoPrepClient(HttpClient httpClient, String algoUrl) {
+    public AlgoPrepClient(HttpClient httpClient) {
         this.httpClient = httpClient;
-        this.algoUrl = algoUrl;
+        this.algoUrl = System.getenv(GITHUB_ALGO_URL);
     }
 
     public Optional<Poll> getPollData(String pollFileName) {

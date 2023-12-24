@@ -13,14 +13,15 @@ import static io.algopreporg.telegrambot.http.RequestMethod.GET;
 import static io.algopreporg.telegrambot.http.RequestMethod.POST;
 
 public class HttpClient {
+    private static final String CONNECTION_TIMEOUT_NAME = "TELEGRAM_BOT_CONNECTION_TIMEOUT";
+    private static final String READ_TIMEOUT_NAME = "TELEGRAM_BOT_READ_TIMEOUT";
     private static final String IDENTITY = "";
-
     private final int connectionTimeout;
     private final int readTimeout;
 
-    public HttpClient(int connectionTimeout, int readTimeout) {
-        this.connectionTimeout = connectionTimeout;
-        this.readTimeout = readTimeout;
+    public HttpClient() {
+        this.connectionTimeout = Integer.parseInt(System.getenv(CONNECTION_TIMEOUT_NAME));
+        this.readTimeout = Integer.parseInt(System.getenv(READ_TIMEOUT_NAME));
     }
 
     public String sendGetMessage(String url, Map<String, String> requestProperties) {
