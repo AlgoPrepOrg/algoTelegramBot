@@ -9,14 +9,14 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
+import static io.algopreporg.telegrambot.http.RequestMethod.GET;
+import static io.algopreporg.telegrambot.http.RequestMethod.POST;
+
 public class HttpClient {
     private static final String IDENTITY = "";
 
     private final int connectionTimeout;
     private final int readTimeout;
-
-    private static final String POST = "POST";
-    private static final String GET = "GET";
 
     public HttpClient(int connectionTimeout, int readTimeout) {
         this.connectionTimeout = connectionTimeout;
@@ -62,11 +62,11 @@ public class HttpClient {
         }
     }
 
-    public HttpURLConnection openConnection(String url, String requestMethod) throws IOException {
+    public HttpURLConnection openConnection(String url, RequestMethod requestMethod) throws IOException {
         var sendUrl = new URL(url);
 
         var connection = (HttpURLConnection) sendUrl.openConnection();
-        connection.setRequestMethod(requestMethod);
+        connection.setRequestMethod(requestMethod.name());
         connection.setConnectTimeout(connectionTimeout);
         connection.setReadTimeout(readTimeout);
 

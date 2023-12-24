@@ -1,12 +1,9 @@
 package io.algopreporg.telegrambot.telegram;
 
 import io.algopreporg.telegrambot.github.AlgoPrepClient;
-import io.algopreporg.telegrambot.github.model.Poll;
 import io.algopreporg.telegrambot.http.HttpClient;
 import io.algopreporg.telegrambot.telegram.model.Message;
 import io.algopreporg.telegrambot.telegram.model.TelegramRequest;
-
-import java.util.Optional;
 
 public class TelegramFactory {
     private static final String GITHUB_ALGO_URL = "GITHUB_ALGO_URL";
@@ -42,10 +39,9 @@ public class TelegramFactory {
             String pollId = text.replace(POLL + SPACE, EMPTY);
 
             var algoPrepClient = new AlgoPrepClient(httpClient, githubAlgoUrl);
-            Optional<Poll> pollData = algoPrepClient.getPollData(pollId);
-            if (pollData.isPresent()) {
-                return telegramBotClient.poll(pollData.get());
-            }
+            return algoPrepClient.getPollData(pollId)
+                    .map(telegramBotClient::poll)
+                    .orElse(null);
         }
 
         return String.format(NO_HANDLER, text);

@@ -35,7 +35,6 @@ public class TelegramBotClient {
     private final Integer chatId;
     private final String botToken;
     private final HttpClient httpClient;
-    private String telegramUrl;
 
     public TelegramBotClient(Integer chatId, String botToken, HttpClient httpClient) {
         this.chatId = chatId;
@@ -44,13 +43,13 @@ public class TelegramBotClient {
     }
 
     public String sendMessage(String message) {
-        this.telegramUrl = String.format(TELEGRAM_SEND_MESSAGE, botToken, SEND_MESSAGE);
+        var telegramUrl = String.format(TELEGRAM_SEND_MESSAGE, botToken, SEND_MESSAGE);
         String createRequest = String.format(CHAT_ID_S_TEXT_S, chatId, message);
         return httpClient.sendPostMessage(telegramUrl, Map.of(CONTENT_TYPE, CONTENT_TYPE_VALUE), createRequest);
     }
 
     public String poll(Poll poll) {
-        this.telegramUrl = String.format(TELEGRAM_SEND_MESSAGE, botToken, SEND_POLL);
+        var telegramUrl = String.format(TELEGRAM_SEND_MESSAGE, botToken, SEND_POLL);
         String optionsText = poll.options().stream()
                 .map(option -> String.format(ITEM, option))
                 .collect(Collectors.joining(DELIMITER));
