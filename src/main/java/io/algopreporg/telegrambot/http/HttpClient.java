@@ -24,6 +24,11 @@ public class HttpClient {
         this.readTimeout = Integer.parseInt(System.getenv(READ_TIMEOUT_NAME));
     }
 
+    public HttpClient(int connectionTimeout, int readTimeout) {
+        this.connectionTimeout = connectionTimeout;
+        this.readTimeout = readTimeout;
+    }
+
     public String sendGetMessage(String url, Map<String, String> requestProperties) {
         HttpURLConnection connection = null;
         try {

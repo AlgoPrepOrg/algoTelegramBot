@@ -20,6 +20,11 @@ public class AlgoPrepClient {
         this.algoUrl = System.getenv(GITHUB_ALGO_URL);
     }
 
+    public AlgoPrepClient(HttpClient httpClient, String algoUrl) {
+        this.httpClient = httpClient;
+        this.algoUrl = algoUrl;
+    }
+
     public Optional<Poll> getPollData(String pollFileName) {
         String url = algoUrl + pollFileName + FILE_TYPE;
 
