@@ -32,7 +32,7 @@ class AlgoPrepClientTest {
     @Test
     void shouldFetchPollAndCreateIt() {
         //given
-        var firstPoll = "1";
+        var firstPoll = "2";
         Poll poll = new Poll(
                 "Проголосуйте за останні 3 задачі",
                 Arrays.asList("Вирішив", "Треба більше часу", "Нічого не зрозуміло. Чекаю коли зберемося.")
