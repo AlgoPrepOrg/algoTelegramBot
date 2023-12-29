@@ -43,6 +43,12 @@ public class TelegramBotClient {
         this.botToken = System.getenv(TOKEN);
     }
 
+    public TelegramBotClient(Integer chatId, String botToken, HttpClient httpClient) {
+        this.chatId = chatId;
+        this.botToken = botToken;
+        this.httpClient = httpClient;
+    }
+
     public String sendMessage(String message) {
         var telegramUrl = String.format(TELEGRAM_SEND_MESSAGE, botToken, SEND_MESSAGE);
         String createRequest = String.format(CHAT_ID_S_TEXT_S, chatId, message);
