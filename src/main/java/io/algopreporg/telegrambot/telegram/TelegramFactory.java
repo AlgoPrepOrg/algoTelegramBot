@@ -2,6 +2,7 @@ package io.algopreporg.telegrambot.telegram;
 
 import io.algopreporg.telegrambot.http.HttpClient;
 import io.algopreporg.telegrambot.telegram.command.Command;
+import io.algopreporg.telegrambot.telegram.command.impl.MdTelegramCommand;
 import io.algopreporg.telegrambot.telegram.command.impl.PollTelegramCommand;
 import io.algopreporg.telegrambot.telegram.command.impl.SelfTelegramCommand;
 import io.algopreporg.telegrambot.telegram.model.Message;
@@ -19,7 +20,8 @@ public class TelegramFactory {
 
         COMMANDS = List.of(
                 new SelfTelegramCommand(httpClient),
-                new PollTelegramCommand(httpClient)
+                new PollTelegramCommand(httpClient),
+                new MdTelegramCommand(httpClient)
         );
     }
 
