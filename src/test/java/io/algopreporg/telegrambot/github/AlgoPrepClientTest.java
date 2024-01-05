@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 
 class AlgoPrepClientTest {
 
-    private static final String URL = "https://algopreporg.github.io/poll/";
+    private static final String URL = "https://algopreporg.github.io";
     public static final int CONNECTION_TIMEOUT = 500;
     public static final int READ_TIMEOUT = 500;
 

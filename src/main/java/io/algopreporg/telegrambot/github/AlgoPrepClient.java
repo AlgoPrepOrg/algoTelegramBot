@@ -8,6 +8,7 @@ import java.util.*;
 public class AlgoPrepClient {
 
     private static final String GITHUB_ALGO_URL = "GITHUB_ALGO_URL";
+    private static final String POLL_PARAMETER = "/poll/";
 
     private static final String FILE_TYPE = ".csv";
     private static final String SPLITERATOR = ";";
@@ -26,7 +27,7 @@ public class AlgoPrepClient {
     }
 
     public Optional<Poll> getPollData(String pollFileName) {
-        String url = algoUrl + pollFileName + FILE_TYPE;
+        String url = algoUrl + POLL_PARAMETER + pollFileName + FILE_TYPE;
 
         String body = httpClient.sendGetMessage(url, new HashMap<>());
 

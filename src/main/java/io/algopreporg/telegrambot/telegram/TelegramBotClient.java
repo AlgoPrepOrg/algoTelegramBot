@@ -39,17 +39,17 @@ public class TelegramBotClient {
     public static final String CHAT_ID_PARAM = "&chat_id=";
     public static final String DISABLE_WEB_PAGE_PREVIEW_TRUE_PARAM = "&disable_web_page_preview=true";
     public static final String PARSE_MODE_MARKDOWN_PARAM = "&parse_mode=markdown";
-    private final Integer chatId;
+    private final String chatId;
     private final String botToken;
     private final HttpClient httpClient;
 
-    public TelegramBotClient(Integer chatId, HttpClient httpClient) {
+    public TelegramBotClient(String chatId, HttpClient httpClient) {
         this.chatId = chatId;
         this.httpClient = httpClient;
         this.botToken = System.getenv(TOKEN);
     }
 
-    public TelegramBotClient(Integer chatId, String botToken, HttpClient httpClient) {
+    public TelegramBotClient(String chatId, String botToken, HttpClient httpClient) {
         this.chatId = chatId;
         this.botToken = botToken;
         this.httpClient = httpClient;
@@ -61,7 +61,7 @@ public class TelegramBotClient {
         return httpClient.sendPostMessage(telegramUrl, Map.of(CONTENT_TYPE, CONTENT_TYPE_VALUE), createRequest);
     }
 
-    public String sendMarkDownMessage(Integer chatId, String message) {
+    public String sendMarkDownMessage(String chatId, String message) {
         var telegramUrl = String.format(TELEGRAM_SEND_MESSAGE, botToken, SEND_MESSAGE);
         String formattedMessage = TEXT + URLEncoder.encode(message, StandardCharsets.UTF_8);
         String createRequest = formattedMessage +

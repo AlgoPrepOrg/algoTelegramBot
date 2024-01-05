@@ -25,7 +25,7 @@ public class MdTelegramCommand implements Command {
     @Override
     public String execute(Message message) {
         String text = message.getText();
-        Integer chatId = message.getChat().getId();
+        String chatId = message.getChat().getId();
         String messageText = text.replace(MD + SPACE, EMPTY);
 
         var telegramBotClient = new TelegramBotClient(chatId, httpClient);

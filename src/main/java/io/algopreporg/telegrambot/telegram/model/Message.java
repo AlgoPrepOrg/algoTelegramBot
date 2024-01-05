@@ -1,10 +1,8 @@
 package io.algopreporg.telegrambot.telegram.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Date;
 import java.util.Objects;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Message {
     private String message_id;
 
