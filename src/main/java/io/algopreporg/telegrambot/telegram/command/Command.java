@@ -1,10 +1,9 @@
 package io.algopreporg.telegrambot.telegram.command;
 
-import io.algopreporg.telegrambot.telegram.model.Message;
 
 public interface Command {
 
-    boolean isHandle(Message message);
+    boolean isHandle(String messageText);
 
-    String execute(Message message);
+    String execute(String messageText, String chatId);
 }

@@ -4,7 +4,6 @@ import io.algopreporg.telegrambot.github.AlgoPrepClient;
 import io.algopreporg.telegrambot.http.HttpClient;
 import io.algopreporg.telegrambot.telegram.TelegramBotClient;
 import io.algopreporg.telegrambot.telegram.command.Command;
-import io.algopreporg.telegrambot.telegram.model.Message;
 
 public class PollTelegramCommand implements Command {
     private static final String POLL = "/poll";
@@ -20,14 +19,12 @@ public class PollTelegramCommand implements Command {
     }
 
     @Override
-    public boolean isHandle(Message message) {
-        return message.getText().startsWith(POLL);
+    public boolean isHandle(String messageText) {
+        return messageText.startsWith(POLL);
     }
 
     @Override
-    public String execute(Message message) {
-        String text = message.getText();
-        String chatId = message.getChat().getId();
+    public String execute(String text, String chatId) {
         String pollId = text.replace(POLL + SPACE, EMPTY);
 
         var telegramBotClient = new TelegramBotClient(chatId, httpClient);

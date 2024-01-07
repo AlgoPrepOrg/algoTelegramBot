@@ -9,6 +9,7 @@ import io.algopreporg.telegrambot.telegram.model.Message;
 import io.algopreporg.telegrambot.telegram.model.TelegramRequest;
 
 import java.util.List;
+import java.util.Objects;
 
 public class TelegramFactory {
     private static final String NO_HANDLER = "No handler for this request: %s";
@@ -30,12 +31,18 @@ public class TelegramFactory {
     }
 
     public static String handleRequest(TelegramRequest request) {
+        Objects.requireNonNull(request, "TelegramRequest must be not null");
         Message message = request.getMessage();
-        String text = message.getText();
-        return COMMANDS.stream()
-                .filter(command -> command.isHandle(message))
-                .map(command -> command.execute(message))
-                .findAny()
-                .orElse(String.format(NO_HANDLER, text));
+
+        if (Objects.nonNull(message) && Objects.nonNull(message.getChat()) && Objects.nonNull(message.getChat().getId())) {
+            String text = message.getText();
+            return COMMANDS.stream()
+                    .filter(command -> command.isHandle(message.getText()))
+                    .map(command -> command.execute(message.getText(), message.getChat().getId()))
+                    .findAny()
+                    .orElse(String.format(NO_HANDLER, text));
+        }
+
+        return String.format(NO_HANDLER, "if message is null");
     }
 }

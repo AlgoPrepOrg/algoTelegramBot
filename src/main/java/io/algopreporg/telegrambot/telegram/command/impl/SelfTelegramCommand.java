@@ -3,7 +3,6 @@ package io.algopreporg.telegrambot.telegram.command.impl;
 import io.algopreporg.telegrambot.http.HttpClient;
 import io.algopreporg.telegrambot.telegram.TelegramBotClient;
 import io.algopreporg.telegrambot.telegram.command.Command;
-import io.algopreporg.telegrambot.telegram.model.Message;
 
 public class SelfTelegramCommand implements Command {
 
@@ -18,14 +17,12 @@ public class SelfTelegramCommand implements Command {
     }
 
     @Override
-    public boolean isHandle(Message message) {
-        return message.getText().startsWith(SELF);
+    public boolean isHandle(String messageText) {
+        return messageText.startsWith(SELF);
     }
 
     @Override
-    public String execute(Message message) {
-        String text = message.getText();
-        String chatId = message.getChat().getId();
+    public String execute(String text, String chatId) {
         String messageText = text.replace(SELF + SPACE, EMPTY);
 
         var telegramBotClient = new TelegramBotClient(chatId, httpClient);
